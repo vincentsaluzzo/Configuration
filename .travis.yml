@@ -1,0 +1,11 @@
+language: swift
+osx_image: xcode9
+xcode_project: Configuration.xcodeproj
+before_install:
+ - gem install fastlane -NV
+script:
+- fastlane scan -s "Configuration-macOS" --clean --code_coverage
+
+after_success:
+- cd $TRAVIS_BUILD_DIR
+- bash <(curl -s https://codecov.io/bash)

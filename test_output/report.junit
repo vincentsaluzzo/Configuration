@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='Configuration-macOS Tests.xctest' tests='4' failures='0'>
+  <testsuite name='Configuration_macOS_Tests.UserDefaultsProtocolTests' tests='4' failures='0'>
+    <testcase classname='Configuration_macOS_Tests.UserDefaultsProtocolTests' name='testCodable' time='0.265'/>
+    <testcase classname='Configuration_macOS_Tests.UserDefaultsProtocolTests' name='testDouble' time='0.002'/>
+    <testcase classname='Configuration_macOS_Tests.UserDefaultsProtocolTests' name='testInt' time='0.001'/>
+    <testcase classname='Configuration_macOS_Tests.UserDefaultsProtocolTests' name='testString' time='0.001'/>
+  </testsuite>
+</testsuites>
