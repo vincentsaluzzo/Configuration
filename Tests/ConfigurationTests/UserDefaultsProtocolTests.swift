@@ -12,10 +12,11 @@ import Configuration
 
 class UserDefaultsProtocolTests: XCTestCase {
     
-    enum Configuration: String, ConfigurationKey {
+    enum Configuration: String {
         case test
-        var `protocol`: ConfigurationProtocol { return UserDefaultsConfigurationsProtocol() }
+        
     }
+    
     
     override func setUp() {
         
@@ -38,3 +39,9 @@ class UserDefaultsProtocolTests: XCTestCase {
     }
     
 }
+
+
+extension UserDefaultsProtocolTests.Configuration: ConfigurationKey {
+    var `protocol`: ConfigurationProtocol { return UserDefaultsConfigurationsProtocol() }
+}
+
