@@ -16,11 +16,14 @@ public class UserDefaultsConfigurationsProtocol: ConfigurationProtocol {
         guard let data = UserDefaults.standard.data(forKey: key) else {
             return nil
         }
+        
+        let value: Type?
         do {
-            return try JSONDecoder().decode(Type.self, from: data)
+            value = try JSONDecoder().decode(Type.self, from: data)
         } catch {
             throw ConfigurationError.serializationError(error)
         }
+        return value
     }
     
     public func setConfiguration<Type: Codable>(value: Type?, forKey key: String) throws {
@@ -28,11 +31,13 @@ public class UserDefaultsConfigurationsProtocol: ConfigurationProtocol {
             UserDefaults.standard.removeObject(forKey: key)
             return
         }
+        let data: Data
         do {
-            let data = try JSONEncoder().encode(value)
-            UserDefaults.standard.set(data, forKey: key)
+            data = try JSONEncoder().encode(value)
+            
         } catch {
             throw ConfigurationError.serializationError(error)
         }
+        UserDefaults.standard.set(data, forKey: key)
     }
 }

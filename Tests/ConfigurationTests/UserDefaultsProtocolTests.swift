@@ -14,7 +14,7 @@ class UserDefaultsProtocolTests: XCTestCase {
     
     enum Configuration: String {
         case test
-        
+        case unsetted
     }
     
     
@@ -22,22 +22,33 @@ class UserDefaultsProtocolTests: XCTestCase {
         
     }
     
-    func testInt() {
+    func testRunWithIntValue() {
         ConfigurationsTestUtils.testConfigurations(Configuration.test, 10)
     }
     
-    func testString() {
+    func testRunWithStringValue() {
         ConfigurationsTestUtils.testConfigurations(Configuration.test, "Lorem ipsum")
     }
     
-    func testCodable() {
+    func testRunWithCodableObject() {
         ConfigurationsTestUtils.testConfigurations(Configuration.test, CodableTest(string: "test"))
     }
     
-    func testDouble() {
+    func testRunWithDoubleValue() {
         ConfigurationsTestUtils.testConfigurations(Configuration.test, 3232.230479)
     }
     
+    func testReturnNilIfPropertyWasEmpty() {
+        ConfigurationsTestUtils.testNilIfUnsetted(Configuration.unsetted)
+    }
+    
+    func testThrowErrorIfReceiverHaveWrongTypeThanExpected() {
+        ConfigurationsTestUtils.testBadReceiverType(Configuration.test)
+    }
+    
+    func testThrowErrorWhenValueWasUnEncodable() {
+        ConfigurationsTestUtils.testUnserializableCorrectly(Configuration.test)
+    }
 }
 
 
