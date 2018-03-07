@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Configuration"
-  s.version      = "1.1.0"
+  s.version      = "1.1.1"
   s.summary      = "Configuration is a simple library which aim to simplify use of setting value in a project."
   s.description  = <<-DESC
     Configuration is a simple library which aim to simplify use of setting value in a project.
