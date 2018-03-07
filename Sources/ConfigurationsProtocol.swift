@@ -10,10 +10,10 @@ import Foundation
 
 public enum ConfigurationError: Swift.Error {
     case underlying(Swift.Error)
-    case serializationError(Swift.Error)
+    case serializationError(Swift.Error?)
 }
 
 public protocol ConfigurationProtocol {
-    func getConfiguration<Type: Codable>(withKey: String) throws -> Type?
-    func setConfiguration<Type: Codable>(value: Type?, forKey: String) throws
+    func getConfiguration<Type>(withKey: String) throws -> ConfigurationValue<Type>?
+    func setConfiguration<Type>(value: ConfigurationValue<Type>?, forKey: String) throws
 }

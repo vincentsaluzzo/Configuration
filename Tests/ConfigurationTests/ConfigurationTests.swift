@@ -15,31 +15,13 @@ struct CodableTest: Codable {
 }
 
 struct BadCodableTest: Codable {
-    var bad: [String: AnyObject]?
-    
-    enum CodingKeys: String, CodingKey {
-        case bad
-    }
-    
-    init() { }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        bad = try container.decodeIfPresent([String: AnyObject].self, forKey: .bad)
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(bad, forKey: .bad)
-    }
+    let infinite: Double = Double.infinity
 }
 
 class ConfigurationsTestUtils {
     
     static func testUnserializableCorrectly<Configuration: ConfigurationKey>(_ configuration: Configuration) {
-//        var badObject = BadCodableTest()
-//        badObject.bad = ["Test": NSNumber(value: 10)]
-        XCTAssertThrowsError(try configuration.set(Double.infinity))
+        XCTAssertThrowsError(try configuration.set(BadCodableTest()))
     }
     
     static func testBadReceiverType<Configuration: ConfigurationKey>(_ configuration: Configuration) {
@@ -50,6 +32,7 @@ class ConfigurationsTestUtils {
         }
         
         XCTAssertThrowsError(try configuration.get() as Double?)
+        XCTAssertThrowsError(try configuration.get() as CodableTest?)
     }
     
     static func testNilIfUnsetted<Configuration: ConfigurationKey>(_ configuration: Configuration) {

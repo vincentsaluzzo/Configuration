@@ -8,7 +8,7 @@
 
 import Foundation
 
-private struct ConfigurationValue<T: Codable>: Codable {
+public struct ConfigurationValue<T: Codable>: Codable {
     var value: T
 }
 
@@ -31,7 +31,7 @@ extension ConfigurationKey {
             let configurationValue = ConfigurationValue(value: value)
             try `protocol`.setConfiguration(value: configurationValue, forKey: key)
         } else {
-            try `protocol`.setConfiguration(value: value, forKey: key)
+            try `protocol`.setConfiguration(value: nil as ConfigurationValue<Type>?, forKey: key)
         }
     }
 }
