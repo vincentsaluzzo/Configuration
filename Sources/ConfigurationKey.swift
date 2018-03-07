@@ -10,6 +10,9 @@ import Foundation
 
 public struct ConfigurationValue<T: Codable>: Codable {
     var value: T
+    public init(value: T) {
+        self.value = value
+    }
 }
 
 public protocol ConfigurationKey: RawRepresentable {
